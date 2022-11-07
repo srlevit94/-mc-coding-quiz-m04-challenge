@@ -15,24 +15,25 @@
         <button id="start">START</button>
     </header>
 
-    <div class="card" id="quiz" style = "display: none;">
-        <div id= "question">
-            <p>Question</p>
-        </div>
-        <div id="choices">
-            <div class="choice" id="A" onclick="checkAnswer('A')">A</div>
-            <div class="choice" id="B" onclick="checkAnswer('B')">B</div>
-            <div class="choice" id="C" onclick="checkAnswer('C')">C</div>
-            <div class="choice" id="D" onclick="checkAnswer('D')">D</div>
-        </div>
+    <div class="card" id="quiz" style.display="none">
+        
+        <div id="timer">Seconds remaining:</div>
+        
+        <div id= "question"><p>Question</p></div>
+        
+        <div id="choices"></div>
+            <button  id="A" onclick="checkAnswer('A')">A</button>
+            <button  id="B" onclick="checkAnswer('B')">B</button>
+            <button  id="C" onclick="checkAnswer('C')">C</button>
+            <button  id="D" onclick="checkAnswer('D')">D</button>
     </div>
 
-    <div class="card">
-        <h2></h2>
-        <p> Seconds remaining: <span id="timer"></span></p>
+    <div id = "scoreboard">
+        <input type="text" id="initials" placeholder="enter initials">
+        <button id="submitScore">Submit</button>
+        <h3 id="final-score">Final Score</h3>
     </div>
 
-    <div id="finalScore" style = "display: none;">100%</div>
 
   <script src="./script.js"></script>
 </body>

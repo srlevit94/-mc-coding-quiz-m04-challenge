@@ -1,18 +1,19 @@
-var start = document.getElementById("start");
-var quiz = document.getElementById("quiz");
-var question = document.getElementById("question");
-var timer = document.getElementById("timer");
+var startEl = document.getElementById("start");
+var quizEl = document.getElementById("quiz");
+var timerEl = document.getElementById("timer");
+var questionEl = document.getElementById("question");
+var choicesEl = document.getElementById("choices");
+var resultEl = document.getElementById("result");
+var finalScoreEl = document.getElementById("final-score");
+var initialsEl = document.getElementById("initials");
 
-var choiceA = document.getElementById("A");
-var choiceB = document.getElementById("B");
-var choiceC = document.getElementById("C");
-var choiceD = document.getElementById("D");
+document.getElementById("quiz").style.display="none";
+document.getElementById("scoreboard").style.display="none";
 
-var finalScore = document.getElementById("finalScore");
 
 var questions = [
     {
-        question: "Question #1",
+        question: "1: The right answer is C",
         choiceA: "AnsA",
         choiceB: "AnsB",
         choiceC: "AnsC",
@@ -20,68 +21,91 @@ var questions = [
         correct: "C"
     },
     {
-        question: "Question #2",
+        question: "2: The right answer is A",
         choiceA: "AnsA",
         choiceB: "AnsB",
         choiceC: "AnsC",
         choiceD: "AnsD",
-        correct: "C"
+        correct: "A"
     },
     {
-        question: "Question #3",
+        question: "3: The right answer is B",
         choiceA: "AnsA",
         choiceB: "AnsB",
         choiceC: "AnsC",
         choiceD: "AnsD",
-        correct: "C"
+        correct: "B"
     },
     {
-        question: "Question #4",
+        question: "4: The right answer is D",
         choiceA: "AnsA",
         choiceB: "AnsB",
         choiceC: "AnsC",
         choiceD: "AnsD",
-        correct: "C"
+        correct: "D"
     },
     {
-        question: "Question #5",
+        question: "5: The right answer is B",
         choiceA: "AnsA",
         choiceB: "AnsB",
         choiceC: "AnsC",
         choiceD: "AnsD",
-        correct: "C"
+        correct: "B"
     },
-    {
-        question: "Question #6",
-        choiceA: "AnsA",
-        choiceB: "AnsB",
-        choiceC: "AnsC",
-        choiceD: "AnsD",
-        correct: "C"
-    },
+    
 ]
 
+var finalQ = questions.length
+var currentQ= 0;
+var setTimer = 60;
+var timerInterval;
+var score = 0;
+var correct;
 
 
-var timeEl = document.querySelector("timer");
-var secondsLeft = 60;
+function cycleQuestions(){
+    if (currentQ === QuestionIndex){
+        return showScore();
+    } 
+    var currentQ = questions[QuestionIndex];
+    questionsEl.innerHTML = "<p>" + currentQ.question + "</p>";
+    buttonA.innerHTML = currentQ.A;
+    buttonB.innerHTML = currentQ.B;
+    buttonC.innerHTML = currentQ.C;
+    buttonD.innerHTML = currentQ.D;
+};
 
+// Shows hidden quiz, starts timer
+function startQuiz(){
+    quiz.style.display = "block";
+    generateQuizQuestion();
 
-function setTime() {
-    // Sets interval in variable
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timeEl.textContent = secondsLeft + "seconds";
-  
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-        // Calls function to create and append image
-        sendMessage();
-      }
-  
-    }, 1000);
-  
-  timeEl.addEventListener('click', function (event)) {
-      setTime()
-  }
+    //Timer
+    timerInterval = setInterval(function() {
+        setTimer--;
+        timer.textContent = "Time left: " + setTimer;
+
+        if(setTimer === 0) {
+          clearInterval(timerInterval);
+          showScore();
+        }
+      }, 1000);
+}
+
+// Checks whether answer is correct and adjusts timer/score accordingly
+function checkAnswer(answer){
+    correct = questions[QuestionIndex].correctAnswer;
+
+    if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
+        score++;
+        QuestionIndex++;
+        generateQuizQuestion();
+    }else if (answer !== correct && QuestionIndex !== finalQuestionIndex){
+        QuestionIndex++;
+        secondsLeft = secondsLeft - 5;
+        generateQuizQuestion();
+    }else{
+        showScore();
+    }
+}
+startEl.addEventListener("click",start);
