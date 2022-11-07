@@ -121,7 +121,6 @@ function checkAnswer(answer){
 }
 
 
-
 // Shows ScoreBoard Div after game is over
 function showScoreBoard(){
     startEl.style.display= "none";
@@ -140,7 +139,7 @@ function saveScoreRecord () {
         playerInitials: initialsEl.value,
         playerScore: score,
     };
-    localStorage.setItem("saveRecord", JSON.stringify(saveRecord));
+    localStorage.setItem(saveRecord.playerInitials, JSON.stringify(saveRecord.playerScore));
 }
 
 // lists all saved scores
@@ -176,9 +175,9 @@ startEl.addEventListener("click", startQuiz);
 submitEl.addEventListener("click", function(event) {
     event.preventDefault
     saveScoreRecord();
-    renderScores();
+    init();
     document.getElementById("scoreboard-list").style.display="block";
     document.getElementById("initials").style.display="none";
     document.getElementById("submitScore").style.display="none";
-
+    console.log(localStorage);
 });
