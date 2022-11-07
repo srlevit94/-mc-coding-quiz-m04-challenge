@@ -7,6 +7,8 @@ var choicesEl = document.getElementById("choices");
 var resultEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("final-score");
 var initialsEl = document.getElementById("initials");
+var submitEl = document.getElementById("submitScore");
+var scoreListEl = document.getElementById("scoreboard-list");
 var buttonA = document.getElementById("A");
 var buttonB = document.getElementById("B");
 var buttonC = document.getElementById("C");
@@ -64,12 +66,13 @@ var questions = [
 //global varibales needed for timer, scorekeeping, and cycling through questions
 var finalQ = questions.length
 var currentQ= 0;
-var secondsLeft = 10;
+var secondsLeft = 30;
 var timerInterval;
 var score = 0;
 var correct;
+var players =[]
 
-
+// pulls questions and corresponding options from array, one at a time
 function cycleQuestions(){
     if (currentQ === finalQ){
         return showScoreBoard();
@@ -82,7 +85,7 @@ function cycleQuestions(){
     buttonD.innerHTML = showCurrentQ.choiceD;
 };
 
-// Shows hidden quiz, starts timer
+// Shows hidden quiz, starts quiz and timer
 function startQuiz(){
     document.getElementById("quiz").style.display="block";
     cycleQuestions();
@@ -117,13 +120,65 @@ function checkAnswer(answer){
     }
 }
 
+
+
+// Shows ScoreBoard Div after game is over
 function showScoreBoard(){
-    startEl.style.display= "none"
-    quiz.style.display = "none"
+    startEl.style.display= "none";
+    quiz.style.display = "none";
     document.getElementById("scoreboard").style.display="block";
     clearInterval(timerInterval);
     initialsEl.value = "";
     finalScoreEl.innerHTML = "You got " + score + " out of " + questions.length + " correct!";
+
+    renderScores();
 }
 
+// saves initials with score to local storage after game is over
+function saveScoreRecord () {
+    var saveRecord = {
+        playerInitials: initialsEl.value,
+        playerScore: score,
+    };
+    localStorage.setItem("saveRecord", JSON.stringify(saveRecord));
+}
+
+// lists all saved scores
+function renderScores() {
+    scoreListEl.innerHTML = "";
+
+    for (var i = 0; i < players.length; i++) {
+        var playerRecord = players[i];
+    
+        var li = document.createElement("li");
+        li.textContent = playerRecord;
+        // li.setAttribute("player-index", i);
+    
+        scoreListEl.appendChild(li);
+      }
+
+}
+
+function init() {
+    // Get stored todos from localStorage
+    var storedScores = JSON.parse(localStorage.getItem("players"));
+  
+    // If todos were retrieved from localStorage, update the todos array to it
+    if (storedScores !== null) {
+      players = storedScores;
+    }
+    renderScores();
+}
+    
+
+
 startEl.addEventListener("click", startQuiz);
+submitEl.addEventListener("click", function(event) {
+    event.preventDefault
+    saveScoreRecord();
+    renderScores();
+    document.getElementById("scoreboard-list").style.display="block";
+    document.getElementById("initials").style.display="none";
+    document.getElementById("submitScore").style.display="none";
+
+});
