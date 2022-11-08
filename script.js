@@ -6,6 +6,8 @@ var questionEl = document.getElementById("question");
 var choicesEl = document.getElementById("choices");
 var resultEl = document.getElementById("result");
 var finalScoreEl = document.getElementById("final-score");
+var finalScoreInitials = document.getElementById("highscore-initials");
+var finalScoreScore = document.getElementById("highscore-score");
 var initialsEl = document.getElementById("initials");
 var submitEl = document.getElementById("submitScore");
 var scoreListEl = document.getElementById("scoreboard-list");
@@ -21,43 +23,43 @@ document.getElementById("scoreboard").style.display="none";
 //An array of 5 questions, the possible options, and correct answer
 var questions = [
     {
-        question: "1: The right answer is C",
-        choiceA: "A",
-        choiceB: "B",
-        choiceC: "C",
-        choiceD: "D",
+        question: "What does HTML stand for?",
+        choiceA: "Hyper Text Makeup Language",
+        choiceB: "Hyper Text Morphing Language",
+        choiceC: "Hyper Text Mockup Language",
+        choiceD: "Hyper Text Markdown Language",
         correctAns: "C"
     },
     {
-        question: "2: The right answer is A",
-        choiceA: "A",
-        choiceB: "B",
-        choiceC: "C",
-        choiceD: "D",
+        question: "Which of the following is a boolean?",
+        choiceA: "true",
+        choiceB: "undefined",
+        choiceC: "5",
+        choiceD: "getElementbyID",
         correctAns: "A"
     },
     {
-        question: "3: The right answer is B",
-        choiceA: "A",
-        choiceB: "B",
-        choiceC: "C",
-        choiceD: "D",
+        question: "Which of the following best represents the first element in an array?",
+        choiceA: "1",
+        choiceB: "0",
+        choiceC: "A",
+        choiceD: "-1",
         correctAns: "B"
     },
     {
-        question: "4: The right answer is D",
-        choiceA: "A",
-        choiceB: "B",
-        choiceC: "C",
-        choiceD: "D",
+        question: "Which of the following is NOT part of the CSS box Model.",
+        choiceA: "Margin",
+        choiceB: "Border",
+        choiceC: "Padding",
+        choiceD: "Buffer",
         correctAns: "D"
     },
     {
-        question: "5: The right answer is B",
-        choiceA: "A",
-        choiceB: "B",
-        choiceC: "C",
-        choiceD: "D",
+        question: "Which option is not a possible conditional statement in a Javascript?",
+        choiceA: "else",
+        choiceB: "swap",
+        choiceC: "else if",
+        choiceD: "switch",
         correctAns: "B"
     },
     
@@ -87,6 +89,7 @@ function cycleQuestions(){
 
 // Shows hidden quiz, starts quiz and timer
 function startQuiz(){
+    document.getElementById("start").style.display="none";
     document.getElementById("quiz").style.display="block";
     cycleQuestions();
     
@@ -147,16 +150,16 @@ function renderScores() {
     scoreListEl.innerHTML = "";
 
     for (var i = 0; i < players.length; i++) {
-        var playerRecord = players[i];
-    
-        var li = document.createElement("li");
-        li.textContent = playerRecord;
+        var player = players[i];
+        li.textContent = player;
         // li.setAttribute("player-index", i);
-    
+        
         scoreListEl.appendChild(li);
+        console.log(li);
       }
 
 }
+
 
 function init() {
     // Get stored todos from localStorage
@@ -179,5 +182,6 @@ submitEl.addEventListener("click", function(event) {
     document.getElementById("scoreboard-list").style.display="block";
     document.getElementById("initials").style.display="none";
     document.getElementById("submitScore").style.display="none";
+    document.getElementById("final-score").style.display="none";
     console.log(localStorage);
 });

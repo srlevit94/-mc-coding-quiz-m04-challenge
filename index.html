@@ -22,17 +22,18 @@
         <div id= "question"><p>Question</p></div>
         
         <div id="choices"></div>
-            <button  id="A" onclick="checkAnswer('A')">A</button>
-            <button  id="B" onclick="checkAnswer('B')">B</button>
-            <button  id="C" onclick="checkAnswer('C')">C</button>
-            <button  id="D" onclick="checkAnswer('D')">D</button>
+            <button  class="letter-button" id="A" onclick="checkAnswer('A')">A</button>
+            <button  class="letter-button" id="B" onclick="checkAnswer('B')">B</button>
+            <button  class="letter-button" id="C" onclick="checkAnswer('C')">C</button>
+            <button  class="letter-button" id="D" onclick="checkAnswer('D')">D</button>
     </div>
 
-    <div id = "scoreboard">
+    <div id = "scoreboard" class="card">
         <input type="text" id="initials" placeholder="enter initials">
         <button id="submitScore">Submit</button>
         <h3 id="final-score">Final Score</h3>
         <ul id="scoreboard-list">Rankings:</ul>
+
     </div>
 
 

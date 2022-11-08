@@ -1,0 +1,29 @@
+
+body {
+    font-size: 30px;
+    font-family: "Roboto", sans-serif;
+    background-color: #eff5f8;
+    color: #001b44;
+    text-align: center;
+  }
+
+  header {
+    color: green
+  }
+
+  .card{
+    display: block;
+    margin: 40px auto;
+    text-align: center;
+    width: 60vw;
+    background-color: #f0ead6;
+  }
+
+  .letter-button{
+    width: 125px;
+  }
+
+  input {
+    background-color: white;
+    height: 20px;
+    }
