@@ -19,7 +19,7 @@
 - THEN the game is over - DONE
 
 - WHEN the game is over
-- THEN I can save my initials and score - saved in Local storage
+- THEN I can save my initials and score - saved in Local storage - DONE
 
 
 ## Relevant Links
