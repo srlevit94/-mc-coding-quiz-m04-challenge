@@ -20,6 +20,7 @@ var buttonD = document.getElementById("D");
 document.getElementById("quiz").style.display="none";
 document.getElementById("scoreboard").style.display="none";
 
+
 //An array of 5 questions, the possible options, and correct answer
 var questions = [
     {
@@ -72,7 +73,6 @@ var secondsLeft = 30;
 var timerInterval;
 var score = 0;
 var correct;
-var players =[]
 
 // pulls questions and corresponding options from array, one at a time
 function cycleQuestions(){
@@ -94,14 +94,15 @@ function startQuiz(){
     cycleQuestions();
     
 
-    //Timer
+    //Timer: 5 seconds deducted from wrong answers
     timerInterval = setInterval(function() {
         secondsLeft--;
         timer.textContent = "Seconds Left: " + secondsLeft;
-
+        // when time runs out, goes to score page 
         if(secondsLeft === 0) {
-          clearInterval(timerInterval);
-          showScoreBoard();
+            showScoreBoard();
+            clearInterval(timerInterval);
+          
         }
       }, 1000);
 }
@@ -132,8 +133,6 @@ function showScoreBoard(){
     clearInterval(timerInterval);
     initialsEl.value = "";
     finalScoreEl.innerHTML = "You got " + score + " out of " + questions.length + " correct!";
-
-    renderScores();
 }
 
 // saves initials with score to local storage after game is over
@@ -145,21 +144,6 @@ function saveScoreRecord () {
     localStorage.setItem(saveRecord.playerInitials, JSON.stringify(saveRecord.playerScore));
 }
 
-// lists all saved scores
-function renderScores() {
-    scoreListEl.innerHTML = "";
-
-    for (var i = 0; i < players.length; i++) {
-        var player = players[i];
-        li.textContent = player;
-        // li.setAttribute("player-index", i);
-        
-        scoreListEl.appendChild(li);
-        console.log(li);
-      }
-
-}
-
 
 function init() {
     // Get stored todos from localStorage
@@ -169,19 +153,25 @@ function init() {
     if (storedScores !== null) {
       players = storedScores;
     }
-    renderScores();
+}
+
+// function to try quiz again}
+function replayQuiz(){
+    startEl.style.display="inline";
+    secondsLeft = 30;
+    score = 0;
+    currentQ = 0;
 }
     
 
 
 startEl.addEventListener("click", startQuiz);
 submitEl.addEventListener("click", function(event) {
-    event.preventDefault
+    event.preventDefault;
     saveScoreRecord();
     init();
-    document.getElementById("scoreboard-list").style.display="block";
-    document.getElementById("initials").style.display="none";
-    document.getElementById("submitScore").style.display="none";
-    document.getElementById("final-score").style.display="none";
-    console.log(localStorage);
+    initialsEl.style.display="none";
+    submitEl.style.display="none";
+    finalScoreEl.style.display="none";
+    replayQuiz();
 });

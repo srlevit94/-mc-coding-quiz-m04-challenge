@@ -5,8 +5,7 @@
 - I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
 - SO THAT I can gauge my progress compared to my peers
 
-## Acceptance Criteria
-- GIVEN I am taking a code quiz
+## Major Feautures
 - WHEN I click the start button**
 - THEN a timer starts and I am presented with a question - DONE
 
@@ -20,4 +19,9 @@
 - THEN the game is over - DONE
 
 - WHEN the game is over
-- THEN I can save my initials and score
+- THEN I can save my initials and score - saved in Local storage, but does not display
+
+
+## Relevant Links
+- GitHub Repo: https://github.com/srlevit94/mc-coding-quiz-m04-challenge
+- Deployed Application: https://srlevit94.github.io/mc-coding-quiz-m04-challenge/
